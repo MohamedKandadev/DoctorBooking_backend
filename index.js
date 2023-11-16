@@ -28,7 +28,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 const corsOptions = {
-  origin: '*'
+  origin: '*',
+  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
 }
 
 app.get('/', (req, res, next) => {
