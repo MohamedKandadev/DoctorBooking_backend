@@ -1,6 +1,6 @@
 import express from "express";
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
+// import cors from 'cors';
 import dotenv from 'dotenv';
 import bodyParser from "body-parser";
 import multer from 'multer';
@@ -27,35 +27,24 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8080;
-const corsOptions = {
-  origin: '*',
-  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
-}
+// const corsOptions = {
+//   origin: '*',
+//   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+// }
 
 app.get('/', (req, res, next) => {
   res.status(200).json('Good')
 })
 app.use(function (req, res, next) {
-
-  // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Pass to next layer of middleware
   next();
 });
 
 app.use(cookieParser())
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(
