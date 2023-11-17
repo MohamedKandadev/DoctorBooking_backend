@@ -5,11 +5,14 @@ import Doctor from '../models/doctorModel.js';
 export const upDateDoctor = asyncHandler(async(req, res, next) => {
   let { specialties, about, phone, ticketPrice, media } = req.body;
   if(req.doctor){  
-    specialties =  specialties || req.user.specialties;
-    about =  about?.trim() || req.user.about;
-    phone =  phone?.trim() || req.user.phone;
-    ticketPrice =  ticketPrice?.trim() || req.user.ticketPrice;
-    media =  media || req.user.media;
+    specialties =  specialties || req.doctor.specialties;
+    about =  about?.trim() || req.doctor.about;
+    phone =  phone?.trim() || req.doctor.phone;
+    ticketPrice =  ticketPrice?.trim() || req.doctor.ticketPrice;
+    media.facebook =  media.facebook || req.doctor.media.facebook || '';
+    media.insta =  media.insta || req.doctor.media.insta || '';
+    media.twitter =  media.twitter || req.doctor.media.twitter || '';
+    media.website =  media.website || req.doctor.media.website || '';
     await Doctor.findOneAndUpdate(
       {user: req.user._id},
       { 
@@ -73,10 +76,19 @@ export const deleteDoctor = asyncHandler(async(req, res, next) => {
 })
 
 export const bestDoctors = asyncHandler(async(req, res, next) => {
-  const doctors = Doctor
+  const doctors = await Doctor
     .find()
-    .limit(6)
-    .sort(['totalRating', -1])
+    .limit(3)
+    .populate({
+      path: "specialties",
+      select: "-_id title"
+    })
+    .populate({
+      path: "user",
+      select: "firstName lastName photo"
+    })
+
+    // .sort(['totalRating', -1])
   res.status(200).json({message: 'Load best doctor succsfully', doctors});
 })
 

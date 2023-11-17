@@ -15,19 +15,69 @@ const doctorSchema = new Schema({
   phone: String,
   ticketPrice: {
     type: Number,
-    require: true
+    require: true,
+    default: 0
   },
-  media: [
-    {
-      facebook: String
+  media: {
+    facebook: {
+      type: String,
+      require: true,
+      default: ''
     },
-    {
-      instagrame: String
+    insta: {
+      type: String,
+      require: true,
+      default: ''
     },
-    {
-      website: String
+    twitter: {
+      type: String,
+      require: true,
+      default: ''
+    },
+    website: {
+      type: String,
+      require: true,
+      default: ''
     }
-  ],
+  },
+  //   {
+  //     platform: {
+  //       type: String,
+  //       default: 'facebook'
+  //     },
+  //     link: {
+  //       type: String,
+  //       default: ''
+  //     }
+  //   },
+  //   {
+  //     platform: {
+  //       default: 'insta'
+  //     },
+  //     link: {
+  //       type: String,
+  //       default: ''
+  //     }
+  //   },
+  //   {
+  //     platform: {
+  //       default: 'twitter'
+  //     },
+  //     link: {
+  //       type: String,
+  //       default: ''
+  //     }
+  //   },
+  //   {
+  //     platform: {
+  //       default: 'website'
+  //     },
+  //     link: {
+  //       type: String,
+  //       default: ''
+  //     }
+  //   },
+  // ],
   totalRating: {
     type: Number,
     default: 0

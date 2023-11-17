@@ -11,13 +11,14 @@ export const currentUser = asyncHandler(async(req, res, next) =>{
 })
 
 export const upDateUser = asyncHandler(async(req, res, next) => {
+  console.log(req.body)
   let { password, firstName, lastName } = req.body;
   password =  password ? bcrypt.hash(password, 12) : req.user.password;
   firstName =  firstName?.trim() || req.user.firstName;
   lastName =  lastName?.trim() || req.user.lastName;
   let photo = req.user.photo;
   if(req.file){
-    clearImage(photo);
+    if(photo) clearImage(photo);
     photo = req.file.path.replace("\\", "/");
   }
   await User.findOneAndUpdate(
