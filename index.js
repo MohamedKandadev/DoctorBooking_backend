@@ -32,7 +32,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 const corsOptions = {
-  origin: ['http://127.0.0.1:5173/', 'https://doctorbooking.cyclic.app/'],
+  origin: '*',
   methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'],
   credentials: true
 }
