@@ -8,3 +8,8 @@ export const addSpecialtie = asyncHandler(async(req, res, next) => {
   await spec.save();
   res.status(200).json({message: 'Add New Specialtie Success'});
 });
+
+export const getSpecialtie = asyncHandler(async(req, res, next) => {
+  const specialties = await Specialtie.find();
+  res.status(200).json(specialties);
+});
