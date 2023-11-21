@@ -6,7 +6,7 @@ const generateToken = (res, userId) => {
     httpOnly: true,
     maxAge: 30 * 24 * 60 * 60 * 1000
   })
-  console.log(req.cookies);
+  console.log(req.cookies.jwt);
 }
 
 export default generateToken;
