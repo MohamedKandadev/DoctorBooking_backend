@@ -25,7 +25,7 @@ export const register = asyncHandler(async (req, res, next) => {
   const hashedPassword = await bcrypt.hash(password, 12);
   const newUser = User({email, password: hashedPassword, firstName, lastName, photo, role})
   newUser.save();
-  res.status(200).json({message: 'Register succes'})
+  res.status(200).json({message: 'Register succes', user: newUser})
 })
 
 export const login = asyncHandler(async (req, res, next) => {
@@ -41,7 +41,7 @@ export const login = asyncHandler(async (req, res, next) => {
   const matchedPassword = user ? await bcrypt.compare(password, user.password) : false;
   if(user && matchedPassword){
     generateToken(res, user._id);
-    res.json('Logged in')
+    res.json({user})
   }else{
     const error = new Error('Email Or Password Not Valid !!');
     error.statusCode = 401;

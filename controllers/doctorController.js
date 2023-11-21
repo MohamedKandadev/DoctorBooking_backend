@@ -45,8 +45,7 @@ export const getDoctorsBySpecialtie = asyncHandler(async(req, res, next) => {
   const numberDoctors = await Doctor
     .find({specialties: specialtiesId})
     .countDocuments()
-
-  res.status(200).json({message: 'Load doctor succsfully', doctors, numberDoctors});
+  res.status(200).json({doctors, numberDoctors});
 })
 
 export const getDoctors = asyncHandler(async(req, res, next) => {

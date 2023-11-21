@@ -10,9 +10,10 @@ import {
 import { upDateUser } from '../controllers/userController.js';
 import { protect, isDoctor } from '../middleware/authMiddleware.js'
 
-router.put('/', protect, isDoctor, upDateUser, upDateDoctor)
+router.route('/')
+  .put(protect, isDoctor, upDateUser, upDateDoctor)
+  .get(getDoctors)
 router.get('/specialtie/:specialtiesId', getDoctorsBySpecialtie)
-router.get('/all', getDoctors)
 router.get('/best', bestDoctors)
 
 export default router;
